@@ -1,6 +1,6 @@
-## Weather Dashboard
+# Weather Dashboard
 
-# User Story
+## User Story
 See the weather outlook for multiple cities so the user can plan a trip accordingly
 
 Acceptance Criteria
