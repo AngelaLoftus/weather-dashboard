@@ -7,29 +7,32 @@
     <!--link to bootstrap-->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css" integrity="sha384-F3w7mX95PdgyTmZZMECAngseQB83DfGTowi0iMjiWaeVhAn4FJkqJByhZMI3AhiU" crossorigin="anonymous">
     <!---bootstrap icons-->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.3.0/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css">
     <title>Weather Dashboard</title>
 </head>
 <body>
+    <!--header card-->
     <div class="jumbotron jumbotron-fluid border-bottom border-dark bg-primary text-light">
         <div class="container">
-          <h1 class="display-4">Weather Dashboard   <i class="bi bi-emoji-sunglasses"></i>
+          <h1 class="display-4">Weather Dashboard   <i class="bi bi-cloud-drizzle"></i><i class="bi bi-cloud-sun"></i><i class="bi bi-sun"></i>
           </h1>
           <p class="lead">Type in any city to view weather data for that city.</p>
         </div>
       </div>
 
-      <div class = "row">
+      <!--collumn for search bar and buttons-->
+      <div class = "row m-4">
         <div class = "col-3">
         <form  >
             <div class="form-group">
             <label for="formGroupExampleInput">Enter a City:</label>
             <input type="text" class="form-control" id="formGroupExampleInput" placeholder="City Name">
             </div>
-            <button type="button" class="btn btn-primary btn-lg">Search</button>
+            <button type="button" class="btn btn-primary btn-lg ml-4">Search</button>
         </form>
         </div>
 
+        <!--container for today weather and five day forecast-->
         <div class = "col-9 ">
             <div class="card">
                 <div class="card-body">
@@ -43,6 +46,7 @@
         </div>
     </div>
 
+    <!--local javascript source-->
     <script src = "assets/js/script.js"></script>
 </body>
 </html>

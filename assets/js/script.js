@@ -34,6 +34,7 @@ fetch(apiUrl).then(function(res){
     }
 }).then(function(data) {
     console.log(data);
+   
 });
 
 // ICON data.daily[i].weather[0].icon
