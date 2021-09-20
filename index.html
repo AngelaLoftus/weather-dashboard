@@ -21,29 +21,28 @@
       </div>
 
       <!--collumn for search bar and buttons-->
+      
+      <div class = "row">
       <div class = "row m-4">
         <div class = "col-2">
-        <form  >
-            <div class="form-group">
-            <label for="formGroupExampleInput">Enter a City:</label>
-            <input type="text" class="form-control" id="formGroupExampleInput" placeholder="City Name">
-            </div>
-            <button type="button" class="btn btn-primary btn-lg ml-4">Search</button>
-        </form>
+            <div class="input">
+                    <input type = 'text' class = "inputValue" placeholder= "Enter a City">
+                    <input type = "submit" value = "Submit" class = "button btn-primary">
+                </div>
         </div>
 
+        
         <!--container for today weather and five day forecast-->
         <div class = "col-10 ">
             <div class="card col-10">
-                <div class="card-body">
-                  <h2 class = "header">Weather for: <span id = "city"></span></h2>
-                  <h3 class = "subtitle">Date: <span id = "today-date"></span></h3>
-                  <p>Temperature: --<span id = "temp-today"></span></p>
-                  <p>Humidity: --<span id = "humidity-today"></span></p>
-                  <p>UV Index: -- <span id = "uv-today"></span></p>
+                <div class = "display">
+                    <h1 class = "cityName"> </h1>
+                    <p class = "desc">  </p>
+                    <p class = "temp"> </p>
+                    <p class = "humidity"> </p>
                 </div>
               </div>
-    
+            </div>
               <div class = 'row'>
                 <div class= 'card col-2'>Day 1 </div>
                 <div class= 'card col-2'>Day 2</div>
