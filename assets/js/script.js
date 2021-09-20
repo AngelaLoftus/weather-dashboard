@@ -46,6 +46,7 @@
 
 // for (i = 1; )
 
+//weather for today
 var apiKey = "6a802a95e3f557de793ca81b8cf06fe3"
 
 var button = document.querySelector(".button");
