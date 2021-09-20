@@ -27,3 +27,4 @@ THEN I am again presented with current and future conditions for that city
 
 
 # Screenshot:
+![screenshot](https://github.com/AngelaLoftus/weather-dashboard/blob/main/assets/screenshot.jpg)
