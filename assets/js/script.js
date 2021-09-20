@@ -45,3 +45,5 @@ fetch(apiUrl).then(function(res){
 
 
 //loop over the array for the five day forecast 
+
+for (i = 1; )
