@@ -34,6 +34,8 @@ var icon3 = document.getElementById("icon3");
 var icon4 = document.getElementById("icon4");
 var icon5 = document.getElementById("icon5");
 
+let uvIndex = document.getElementById("UVIndex");
+uvIndex.innerHTML = "UV Index: "
 
 var date1 = document.getElementById("date1");
 
@@ -248,11 +250,51 @@ function handleSearchData () {
             desc.innerHTML = 'Description: ' + descValue;
             humidity.innerHTML = 'Humidity: ' + humidityValue + "%";
             windspeed.innerHTML = 'Wind Speed: ' + windspeedValue + " MPH";
+            getAndRenderUVIndex(lat, long);
             fetchFiveDayWeather();
 
 })
 };
 
+
+
+function getAndRenderUVIndex (lat, long) {
+    //https://api.openweathermap.org/data/2.5/onecall?lat=33.44&lon=-94.04&exclude=hourly,daily&appid={API key}
+    // let apiUrl = "//https://api.openweathermap.org/data/2.5/onecall?" + "lat=" + lat+ "&" +"lon="+ long + "&exclude=hourly,daily&appid=" + apiKey;
+    let apiUrl =  "https://api.openweathermap.org/data/2.5/onecall?lat="+lat+ "&lon=" + long + "&exclude=hourly,daily&appid=6a802a95e3f557de793ca81b8cf06fe3"
+
+    fetch(apiUrl)
+    .then (response => response.json())
+    .then(data => {
+        console.log("ONECALL API", data);
+    let uvIndexValue = data.current.uvi;
+    uvIndex.innerHTML =  uvIndexValue;
+    
+
+    if(uvIndexValue > 4){
+        uvIndex.classList.add("bg-danger");
+        uvIndex.classList.add("text-white");
+    }
+    if (uvIndexValue > 3 && uvIndexValue <= 4) {
+        uvIndex.classList.add("bg-warning");
+        uvIndex.classList.add("text-white");
+    }
+    else if( uvIndexValue <=3 ) {
+        uvIndex.classList.add("bg-success");
+        uvIndex.classList.add("text-white");
+    } 
+    else return;
+    })
+};
+
+function uvIndexColor() {
+    if( uvIndex.value <= 3) {
+        element.classList.add("bg-success");
+    }
+    else    return;
+}
+
+ 
 button.addEventListener('click', handleSearchData);
 
 function handleSearchClick(e) {
@@ -269,4 +311,4 @@ historyEl.addEventListener('click',  handleSearchHistoryClick);
 // }
 
 // getSearchHistory();
-// searchHistoryEl.addEventListener("click", handleSearchHistoryClick );
+// searchHistoryEl.addEventListener("click", handleSearchHistoryClick )  
