@@ -87,29 +87,95 @@ function returnFiveDayForecast(data) {
         console.log("DATA", data);
 
             //repeat this for all five days
-            //
+            //retrieve day 1 data from API
             var temp1Value = data.list[0].main.temp;
             console.log(temp1Value);
-
             var humidity1Value = data.list[0].main.humidity;
-            console.log(humidity1Value);
-            
+            console.log(humidity1Value);          
             var windspeedValue1 = data.list[0].wind.speed;
-            console.log(windspeedValue1);
-            
+            console.log(windspeedValue1);            
             let weatherIcon1 = data.list[0].weather[0].icon;
             console.log(weatherIcon1);
-            
             var date1Value = data.list[0].dt_txt.split(" ")[0];
             console.log(date1Value);
 
-
-            icon1.setAttribute( "src", "https://openweathermap.org/img/wn/" + weatherIcon1 + "@2x.png");
-            
-            temp1.innerHTML = Math.floor((temp1Value-273.15)*(9/5) + 32);
-            humidity1.innerHTML = humidity1Value;
-            windspeed1.innerHTML = windspeedValue1;
+            //append data onto card 1
             date1.innerHTML = date1Value;
+            icon1.setAttribute( "src", "https://openweathermap.org/img/wn/" + weatherIcon1 + "@2x.png");
+            temp1.innerHTML = "Temperature: " + Math.floor((temp1Value-273.15)*(9/5) + 32) + "&degF";
+            humidity1.innerHTML = "Humidity: " + humidity1Value + "%";
+            windspeed1.innerHTML = "Wind Speed: " + windspeedValue1 + " MPH";
+
+            //retrieve day 2 data from API
+            var temp2Value = data.list[8].main.temp;
+            var humidity2Value = data.list[8].main.humidity;            
+            var windspeedValue2 = data.list[8].wind.speed;            
+            let weatherIcon2 = data.list[8].weather[0].icon;            
+            var date2Value = data.list[8].dt_txt.split(" ")[0];
+ 
+            //append data onto card 2
+            date2.innerHTML = date2Value;
+            icon2.setAttribute( "src", "https://openweathermap.org/img/wn/" + weatherIcon2 + "@2x.png");
+            temp2.innerHTML = "Temperature: " + Math.floor((temp2Value-273.15)*(9/5) + 32) + "&degF";
+            humidity2.innerHTML = "Humidity: " + humidity2Value + "%";
+            windspeed2.innerHTML = "Wind Speed: " + windspeedValue2 + " MPH";
+
+            //retrieve day 3 data from API
+            var temp3Value = data.list[16].main.temp;
+            console.log(temp3Value);
+            var humidity3Value = data.list[16].main.humidity;
+            console.log(humidity3Value);           
+            var windspeedValue3 = data.list[16].wind.speed;
+            console.log(windspeedValue3);            
+            let weatherIcon3 = data.list[16].weather[0].icon;
+            console.log(weatherIcon3);           
+            var date3Value = data.list[16].dt_txt.split(" ")[0];
+            console.log(date3Value);
+
+            //append data onto card 3
+            date3.innerHTML = date3Value;
+            icon3.setAttribute( "src", "https://openweathermap.org/img/wn/" + weatherIcon3 + "@2x.png");
+            temp3.innerHTML = "Temperature: " + Math.floor((temp3Value-273.15)*(9/5) + 32) + "&degF";
+            humidity3.innerHTML = "Humidity: " + humidity3Value + "%";
+            windspeed3.innerHTML = "Wind Speed: " + windspeedValue3 + " MPH";
+
+            //retrieve day 4 data from API
+            var temp4Value = data.list[24].main.temp;
+            console.log(temp4Value);
+            var humidity4Value = data.list[24].main.humidity;
+            console.log(humidity4Value);         
+            var windspeedValue4 = data.list[24].wind.speed;
+            console.log(windspeedValue4);       
+            let weatherIcon4 = data.list[24].weather[0].icon;
+            console.log(weatherIcon4);            
+            var date4Value = data.list[24].dt_txt.split(" ")[0];
+            console.log(date4Value);
+
+            //append data onto card 4
+            date4.innerHTML = date4Value;
+            icon4.setAttribute( "src", "https://openweathermap.org/img/wn/" + weatherIcon4 + "@2x.png");
+            temp4.innerHTML = "Temperature: " + Math.floor((temp4Value-273.15)*(9/5) + 32) + "&degF";
+            humidity4.innerHTML = "Humidity: " + humidity4Value + "%";
+            windspeed4.innerHTML = "Wind Speed: " + windspeedValue4 + " MPH";
+
+            //retrieve day 5 data from API
+            var temp5Value = data.list[32].main.temp;
+            console.log(temp5Value);
+            var humidity5Value = data.list[32].main.humidity;
+            console.log(humidity5Value);   
+            var windspeedValue5 = data.list[32].wind.speed;
+            console.log(windspeedValue5);          
+            let weatherIcon5 = data.list[32].weather[0].icon;
+            console.log(weatherIcon5);
+            var date5Value = data.list[32].dt_txt.split(" ")[0];
+            console.log(date5Value);
+
+            //append data onto card 5
+            date5.innerHTML = date5Value;
+            icon5.setAttribute( "src", "https://openweathermap.org/img/wn/" + weatherIcon5 + "@2x.png");
+            temp5.innerHTML = "Temperature: " + Math.floor((temp5Value-273.15)*(9/5) + 32) + "&degF";
+            humidity5.innerHTML = "Humidity: " + humidity5Value + "%";
+            windspeed5.innerHTML = "Wind Speed: " + windspeedValue5 + " MPH";
              // let weatherIcon = data.weather[0].icon;
             // lat = data.coord.lat;
             // console.log("lat", lat);
@@ -177,11 +243,11 @@ function handleSearchData () {
             console.log("icon", data.weather[0].icon); 
             
             cityName.innerHTML= 'City Name: ' + nameValue + "(" + month + "/" + day + "/" + year + ")";
+            icon.setAttribute( "src", "https://openweathermap.org/img/wn/" + weatherIcon + "@2x.png");
             temp.innerHTML = 'Temperature: ' + tempValue + "&degF;";
             desc.innerHTML = 'Description: ' + descValue;
             humidity.innerHTML = 'Humidity: ' + humidityValue + "%";
             windspeed.innerHTML = 'Wind Speed: ' + windspeedValue + " MPH";
-            icon.setAttribute( "src", "https://openweathermap.org/img/wn/" + weatherIcon + "@2x.png");
             fetchFiveDayWeather();
 
 })
@@ -197,7 +263,7 @@ function handleSearchClick(e) {
     handleSearchData();
 
 }
-historyEl.addEventListener('click',  handleSearchClick);
+historyEl.addEventListener('click',  handleSearchHistoryClick);
 // function handleSearchHistoryClick() {
 //     //we will work on this next time! 
 // }
