@@ -1,3 +1,7 @@
 .row{ 
     margin-bottom: 10px;
 }
+
+.searchHistory {
+    background-color: pink;
+}
