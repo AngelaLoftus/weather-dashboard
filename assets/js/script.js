@@ -35,8 +35,6 @@ var icon4 = document.getElementById("icon4");
 var icon5 = document.getElementById("icon5");
 
 let uvIndex = document.getElementById("UVIndex");
-uvIndex.innerHTML = "UV Index: "
-
 var date1 = document.getElementById("date1");
 
 var historyEl = document.getElementById("history");
@@ -246,10 +244,10 @@ function handleSearchData () {
             
             cityName.innerHTML= 'City Name: ' + nameValue + "(" + month + "/" + day + "/" + year + ")";
             icon.setAttribute( "src", "https://openweathermap.org/img/wn/" + weatherIcon + "@2x.png");
-            temp.innerHTML = 'Temperature: ' + tempValue + "&degF;";
-            desc.innerHTML = 'Description: ' + descValue;
-            humidity.innerHTML = 'Humidity: ' + humidityValue + "%";
-            windspeed.innerHTML = 'Wind Speed: ' + windspeedValue + " MPH";
+            temp.innerHTML =  tempValue + "&degF;";
+            desc.innerHTML =  descValue;
+            humidity.innerHTML = humidityValue + "%";
+            windspeed.innerHTML = windspeedValue + " MPH";
             getAndRenderUVIndex(lat, long);
             fetchFiveDayWeather();
 
