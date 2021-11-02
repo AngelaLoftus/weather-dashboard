@@ -271,11 +271,11 @@ function getAndRenderUVIndex (lat, long) {
     uvIndex.innerHTML =  uvIndexValue;
     
 
-    if(uvIndexValue > 4){
+    if(uvIndexValue > 6){
         uvIndex.classList.add("bg-danger");
         uvIndex.classList.add("text-white");
     }
-    if (uvIndexValue > 3 && uvIndexValue <= 4) {
+    if (uvIndexValue > 3 && uvIndexValue <= 6) {
         uvIndex.classList.add("bg-warning");
         uvIndex.classList.add("text-white");
     }
