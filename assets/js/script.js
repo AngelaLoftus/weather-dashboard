@@ -41,6 +41,7 @@ var historyEl = document.getElementById("history");
 let searchHistory = [];
 let lat; 
 let long;
+let currentCity;
 
 
 function getSearchHistory() {
@@ -53,19 +54,26 @@ function getSearchHistory() {
 
 function renderSearchHistory () {
     historyEl.innerHTML = "";
-    for (let i = searchHistory.length - 1; i > 0; i--){
+    for (let i = searchHistory.length - 1; i >= 0; i--){
         let button = document.createElement("button");
         button.setAttribute("aria-controls", "today-forecast");
         button.setAttribute("type", "button");
         button.classList.add("history-button", "buttonHistory");
         button.setAttribute("data-search", searchHistory[i]);
-        button.textContent(searchHistory[i]);
+        button.textContent = searchHistory[i];
         historyEl.append(button);
     }
 }
 
-function addToSearchHistory () {
-    //TBD
+function addToSearchHistory (nameOfCity) {
+    console.log("CITYNAME", nameOfCity);
+    if(searchHistory.indexOf(nameOfCity) != -1) {
+        return;
+    }
+    searchHistory.push(nameOfCity);
+    localStorage.setItem("cityNames", JSON.stringify(searchHistory));
+    getSearchHistory();
+ 
 }
 
 function fetchFiveDayWeather() {
@@ -83,6 +91,7 @@ function fetchFiveDayWeather() {
         });
 };
 
+//function to return all five day forecast 
 function returnFiveDayForecast(data) {
         console.log("DATA", data);
 
@@ -176,51 +185,11 @@ function returnFiveDayForecast(data) {
             temp5.innerHTML = "Temperature: " + Math.floor((temp5Value-273.15)*(9/5) + 32) + "&degF";
             humidity5.innerHTML = "Humidity: " + humidity5Value + "%";
             windspeed5.innerHTML = "Wind Speed: " + windspeedValue5 + " MPH";
-             // let weatherIcon = data.weather[0].icon;
-            // lat = data.coord.lat;
-            // console.log("lat", lat);
-            // long = data.coord.lon;
-            // console.log("long", long);
-            // console.log("icon", data.weather[0].icon); 
-            
-            // cityName.innerHTML= 'City Name: ' + nameValue + "(" + month + "/" + day + "/" + year + ")";
-            // temp.innerHTML = 'Temperature: ' + tempValue + "&degF;";
-            // desc.innerHTML = 'Description: ' + descValue;
-            // humidity.innerHTML = 'Humidity: ' + humidityValue + "%";
-            // windspeed.innerHTML = 'Wind Speed: ' + windspeedValue + " MPH";
-            // icon.setAttribute( "src", "https://openweathermap.org/img/wn/" + weatherIcon + "@2x.png");
 }
 
-//render UV index function for day 1
+function handleSearchData (city) {
 
-
-let geoApiUrl = "https://api.openweathermap.org/geo/1.0/direct?q=" + inputValue.value + "&appid=" + apiKey;
-// function getLatLong () {
-//     fetch(geoApiUrl)
-//     .then( function (res){ 
-//         return res.json();
-
-//     }).then( function (data) {
-//         if (! data[0] ) {
-//             alert("Cannot get lat or long");
-//         } else {
-//             console.log(data[0]);
-//             handleSearchData();
-//             addToSearchHistory();
-//         } 
-//     }).catch(function (error) {
-//         console.log(error);
-//     });
-// };
-
-
-//api.openweathermap.org/data/2.5/forecast?lat={lat}&lon={lon}&appid={API key}
-//http://api.openweathermap.org/geo/1.0/direct?q={city name},{state code},{country code}&limit={limit}&appid={API key}
-
-
-function handleSearchData () {
-
-    fetch('https://api.openweathermap.org/data/2.5/weather?q=' + inputValue.value + "&appid=" + apiKey + "&units=imperial")
+    fetch('https://api.openweathermap.org/data/2.5/weather?q=' + inputValue.value  + "&appid=" + apiKey + "&units=imperial")
         .then(response => response.json())
         .then (data => {
             console.log("date", data.dt); 
@@ -250,6 +219,7 @@ function handleSearchData () {
             windspeed.innerHTML = windspeedValue + " MPH";
             getAndRenderUVIndex(lat, long);
             fetchFiveDayWeather();
+            addToSearchHistory(inputValue.value);
 
 })
 };
@@ -299,14 +269,23 @@ function handleSearchClick(e) {
     let button = e.target;
     let searchCity = button.getAttribute("data-search");
     console.log(searchCity);
-    inputValue.value = searchCity;
-    handleSearchData();
-
+    currentCity = searchCity;
+    handleSearchData(currentCity);
+    inputValue.value = "";
+    
 }
 historyEl.addEventListener('click',  handleSearchHistoryClick);
-// function handleSearchHistoryClick() {
-//     //we will work on this next time! 
-// }
 
-// getSearchHistory();
-// searchHistoryEl.addEventListener("click", handleSearchHistoryClick )  
+function handleSearchHistoryClick(e) {
+    console.log("e", e)
+    if(!e.target.matches(".searchHistory")) {
+        return;
+    }
+    let newButton = e.target;
+    let searchCity = newButton.getAttribute("data-search");
+    currentCity = searchCity;
+    handleSearchData(currentCity);
+    
+}
+
+getSearchHistory();
