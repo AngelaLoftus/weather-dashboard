@@ -267,7 +267,7 @@ button.addEventListener('click', handleSearchData);
 
 function handleSearchClick(e) {
     let button = e.target;
-    let searchCity = button.getAttribute("data-search");
+    let searchCity = button.getAttribute("data-search",searchHistory[i]);
     console.log(searchCity);
     currentCity = searchCity;
     handleSearchData(currentCity);
@@ -278,14 +278,44 @@ historyEl.addEventListener('click',  handleSearchHistoryClick);
 
 function handleSearchHistoryClick(e) {
     console.log("e", e)
-    if(!e.target.matches(".searchHistory")) {
-        return;
-    }
+    // if(!e.target.matches(".searchHistory")) {
+    //     return;
+    // }
+    console.log(e.target);
     let newButton = e.target;
     let searchCity = newButton.getAttribute("data-search");
-    currentCity = searchCity;
-    handleSearchData(currentCity);
+    console.log("SEARCH CITY ON BUTTON CLICK", searchCity);
+    fetch('https://api.openweathermap.org/data/2.5/weather?q=' + searchCity  + "&appid=" + apiKey + "&units=imperial")
+        .then(response => response.json())
+        .then (data => {
+            console.log("date", data.dt); 
+            const currentDate = new Date(data.dt * 1000);
+            const day = currentDate.getDate();
+            let month = currentDate.getMonth()+1;
+            let year = currentDate.getFullYear();
     
-}
+            console.log(data);
+            var nameValue = data["name"]; 
+            var tempValue = data["main"]["temp"];
+            var descValue = data["weather"][0]["description"];
+            var humidityValue = data["main"]["humidity"];
+            var windspeedValue = data.wind.speed;
+            let weatherIcon = data.weather[0].icon;
+            lat = data.coord.lat;
+            console.log("lat", lat);
+            long = data.coord.lon;
+            console.log("long", long);
+            console.log("icon", data.weather[0].icon); 
+            
+            cityName.innerHTML= 'City Name: ' + nameValue + "(" + month + "/" + day + "/" + year + ")";
+            icon.setAttribute( "src", "https://openweathermap.org/img/wn/" + weatherIcon + "@2x.png");
+            temp.innerHTML =  tempValue + "&degF;";
+            desc.innerHTML =  descValue;
+            humidity.innerHTML = humidityValue + "%";
+            windspeed.innerHTML = windspeedValue + " MPH";
+            getAndRenderUVIndex(lat, long);
+            fetchFiveDayWeather();
+    })
+};
 
 getSearchHistory();
